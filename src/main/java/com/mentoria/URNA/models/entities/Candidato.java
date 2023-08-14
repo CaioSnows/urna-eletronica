@@ -11,9 +11,16 @@ public class Candidato {
     private Long id;
     private String nome;
     private String partido;
-    private int numeroDoCandidato;
+    private String numeroDoCandidato;
     private String cargo;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -31,20 +38,12 @@ public class Candidato {
         this.partido = partido;
     }
 
-    public int getNumeroDoCandidato() {
+    public String getNumeroDoCandidato() {
         return numeroDoCandidato;
     }
 
-    public void setNumeroDoCandidato(int numeroDoCandidato) {
+    public void setNumeroDoCandidato(String numeroDoCandidato) {
         this.numeroDoCandidato = numeroDoCandidato;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getCargo() {
@@ -54,4 +53,4 @@ public class Candidato {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-}
+    }
