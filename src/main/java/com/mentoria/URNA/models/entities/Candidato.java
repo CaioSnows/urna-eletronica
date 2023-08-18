@@ -10,10 +10,27 @@ public class Candidato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
+    private String cpf;
     private String partido;
-    private int numeroDoCandidato;
+    private String numeroDoCandidato;
     private String cargo;
+    private int numeroDeVotos;
 
+    public int getNumeroDeVotos() {
+        return numeroDeVotos;
+    }
+
+    public void setNumeroDeVotos(int numeroDeVotos) {
+        this.numeroDeVotos = numeroDeVotos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -31,20 +48,12 @@ public class Candidato {
         this.partido = partido;
     }
 
-    public int getNumeroDoCandidato() {
+    public String getNumeroDoCandidato() {
         return numeroDoCandidato;
     }
 
-    public void setNumeroDoCandidato(int numeroDoCandidato) {
+    public void setNumeroDoCandidato(String numeroDoCandidato) {
         this.numeroDoCandidato = numeroDoCandidato;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getCargo() {
@@ -53,5 +62,13 @@ public class Candidato {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public String getCpf(){
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

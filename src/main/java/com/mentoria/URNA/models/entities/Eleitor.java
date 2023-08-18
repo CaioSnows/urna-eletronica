@@ -12,7 +12,6 @@ public class Eleitor {
     private String nome;
     private String dataDeNascimento;
     private String cpf;
-    private String rg;
 
     public String getNome() {
         return nome;
@@ -36,14 +35,6 @@ public class Eleitor {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
     }
 
     public void setId(Long id) {
