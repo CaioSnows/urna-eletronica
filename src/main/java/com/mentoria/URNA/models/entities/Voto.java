@@ -3,7 +3,7 @@ package com.mentoria.URNA.models.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TABELA_ELEICAO")
+@Table(name = "TABELA_VOTO")
 public class Voto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

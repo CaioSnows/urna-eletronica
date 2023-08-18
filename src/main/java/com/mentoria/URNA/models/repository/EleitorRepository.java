@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EleitorRepository extends JpaRepository<Eleitor, Long> {
 
-    public boolean findByCpf(String cpf);
 
 }

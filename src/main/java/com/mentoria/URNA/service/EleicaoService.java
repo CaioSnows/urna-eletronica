@@ -1,36 +1,31 @@
 package com.mentoria.URNA.service;
 
-import com.mentoria.URNA.exception.EleitorAlreadyVotedExeception;
-import com.mentoria.URNA.models.entities.Voto;
-import com.mentoria.URNA.models.repository.VotoRepository;
+import com.mentoria.URNA.exception.EleicaoDoesNotExistsException;
+import com.mentoria.URNA.models.entities.Eleicao;
+import com.mentoria.URNA.models.repository.EleicaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class EleicaoService {
 
     @Autowired
-    VotoRepository votoRepository;
+    EleicaoRepository eleicaoRepository;
 
-    public void registrarVoto(Voto voto){
+    public void abrirEleicao(Long id){
+        Eleicao eleicao = eleicaoRepository.findById(id)
+                .orElseThrow(EleicaoDoesNotExistsException::new);
 
-        verificaVoto(voto);
-        votoRepository.save(voto);
+        eleicao.setActive(true);
+        eleicaoRepository.save(eleicao);
     }
 
-    public void verificaVoto(Voto voto){
-        List<Voto> listaVoto = votoRepository.findAll();
+    public void fecharEleicao(Long id){
+        Eleicao eleicao = eleicaoRepository.findById(id)
+                .orElseThrow(EleicaoDoesNotExistsException::new);
 
-        List<String> listCpfEleitor = new ArrayList<>();
-        listaVoto.forEach(voto1 -> listCpfEleitor.add(
-                voto1.getCpfDoEleitor()));
-
-        boolean validacao = listCpfEleitor.contains(voto.getCpfDoEleitor());
-        if(validacao){
-            throw new EleitorAlreadyVotedExeception();
-        }
+        eleicao.setActive(false);
+        eleicaoRepository.save(eleicao);
     }
 }

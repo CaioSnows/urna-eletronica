@@ -6,6 +6,8 @@ import com.mentoria.URNA.exception.CpfIsIncorrectException;
 import com.mentoria.URNA.exception.EleitorAlreadyRegisterException;
 import com.mentoria.URNA.models.entities.Eleitor;
 import com.mentoria.URNA.models.repository.EleitorRepository;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

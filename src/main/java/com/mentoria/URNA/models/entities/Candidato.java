@@ -10,9 +10,19 @@ public class Candidato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
+    private String cpf;
     private String partido;
     private String numeroDoCandidato;
     private String cargo;
+    private int numeroDeVotos;
+
+    public int getNumeroDeVotos() {
+        return numeroDeVotos;
+    }
+
+    public void setNumeroDeVotos(int numeroDeVotos) {
+        this.numeroDeVotos = numeroDeVotos;
+    }
 
     public Long getId() {
         return id;
@@ -53,4 +63,12 @@ public class Candidato {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
+    public String getCpf(){
+        return cpf;
     }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+}
