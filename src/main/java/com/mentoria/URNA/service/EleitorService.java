@@ -20,11 +20,12 @@ public class EleitorService {
     @Autowired
     private EleitorRepository eleitorRepository;
 
-    public void registrar(Eleitor eleitor){
+    public Eleitor registrar(Eleitor eleitor){
         verificaCpf(eleitor);
         validaCpf(eleitor);
 
         eleitorRepository.save(eleitor);
+        return eleitor;
     }
 
     public void verificaCpf(Eleitor eleitor){
