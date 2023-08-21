@@ -10,12 +10,14 @@ import com.mentoria.URNA.models.repository.EleitorRepository;
 import com.mentoria.URNA.service.CandidatoService;
 import com.mentoria.URNA.service.EleicaoService;
 import com.mentoria.URNA.service.EleitorService;
+import com.mentoria.URNA.service.VotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/eleicao")
@@ -33,6 +35,8 @@ public class UrnaController {
     private final EleicaoService eleicaoService;
 
     private final EleicaoRepository eleicaoRepository;
+
+    private final VotoService votoService;
 
     @GetMapping(path = "/eleitores")
     public List<Eleitor>   listarEleitores(){
@@ -63,24 +67,27 @@ public class UrnaController {
     }
 
     @PostMapping(path = "/cadastrar-eleitor")
-    public ResponseEntity<HttpStatus> cadastrarEleitor(@RequestBody Eleitor eleitor){
-        eleitorService.registrar(eleitor);
-        return ResponseEntity.status(HttpStatus.CREATED).body(null); // Forma errada, olhar forma padrão (grid manager)
+    public ResponseEntity<Eleitor> cadastrarEleitor(@RequestBody Eleitor eleitor){
+        Eleitor eleitorCadastrado = eleitorService.registrar(eleitor);
+        return ResponseEntity.ok(eleitorCadastrado);
     }
 
     @PostMapping(path = "/cadastrar-candidato")
-    public ResponseEntity<HttpStatus> cadastrarCandidato(@RequestBody Candidato candidato){
-        candidatoService.registrar(candidato);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    public ResponseEntity<Candidato> cadastrarCandidato(@RequestBody Candidato candidato){
+        Candidato candidatoRegistardo = candidatoService.registrar(candidato);
+        return ResponseEntity.ok(candidatoRegistardo);
     }
 
-//    @PostMapping(path = "/{ano}/votar")
-//    public ResponseEntity<HttpStatus> votar(@RequestBody Voto voto,
-//                                            @PathVariable String ano){
-//        eleicaoService.registrarVoto(voto, ano);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
+    @PostMapping(path = "/{ano}/votar")
+    public ResponseEntity<HttpStatus> votar(@RequestBody Voto voto,
+                                            @PathVariable String ano) throws Exception {
+        votoService.registraVoto(voto, ano);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
-
+    @GetMapping(path = "/resultado")
+    public ResponseEntity<Map<String, Candidato>> resultado() {
+        return ResponseEntity.ok(eleicaoService.resultadoDaEleicao());
+    }
 
 }
